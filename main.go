@@ -1,9 +1,23 @@
 package main
 
 import (
-  "fmt"
+	"time"
+
+	"github.com/thorbenbender/pokedex/internal/pokeapi"
 )
 
+type config struct {
+  pokeapiClient pokeapi.Client
+  nextLocationAreaURL *string
+  prevLocationAreaURL *string
+  caughtPokemon map[string]pokeapi.Pokemon
+}
+
+
 func main()  {
-  fmt.Println("Hello World!!!")
+  cfg := config {
+    pokeapiClient: pokeapi.NewClient(time.Hour),
+    caughtPokemon: make(map[string]pokeapi.Pokemon),
+  }
+  startRepl(&cfg)
 }
